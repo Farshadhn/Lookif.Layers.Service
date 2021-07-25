@@ -12,7 +12,7 @@ using Lookif.Layers.Core.MainCore.Identities;
 using Lookif.Layers.Core.Else.JWT;
 using Microsoft.AspNetCore.Identity;
 
-namespace ESS.Service.Jwt
+namespace Lookif.Layers.Service.Jwt
 {
 
     public class JwtService : IJwtService, IScopedDependency

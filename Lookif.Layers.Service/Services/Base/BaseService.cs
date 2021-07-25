@@ -9,7 +9,7 @@ using Lookif.Layers.Core.Infrastructure.Base;
 using Lookif.Layers.Core.MainCore.Base;
 using Lookif.Layers.Data.Contracts;
 using Microsoft.EntityFrameworkCore;
-namespace ESS.Service.Services.Base
+namespace Lookif.Layers.Service.Services.Base
 {
     public class BaseService<T, J> : IBaseService<T, J>
   where T : class, IEntity<J>

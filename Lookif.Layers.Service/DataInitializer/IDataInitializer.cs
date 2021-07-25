@@ -1,6 +1,6 @@
 ﻿using Lookif.Library.Common;
 
-namespace ESS.Service.DataInitializer
+namespace Lookif.Layers.Service.DataInitializer
 {
     public interface IDataInitializer : IScopedDependency
     {

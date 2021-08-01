@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Lookif.Layers.Core.Infrastructure.Base;
-using Lookif.Layers.Core.MainCore.Base;
-using Lookif.Layers.Data.Contracts;
+using Lookif.Layers.Core.Infrastructure.Base.Repositories;
+using Lookif.Layers.Core.MainCore.Base; 
 using Microsoft.EntityFrameworkCore;
 namespace Lookif.Layers.Service.Services.Base
 {

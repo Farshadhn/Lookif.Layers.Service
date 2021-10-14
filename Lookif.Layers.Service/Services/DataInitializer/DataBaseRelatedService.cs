@@ -1,6 +1,5 @@
 ﻿using Lookif.Layers.Core.Infrastructure.Base;
 using Lookif.Layers.Core.Infrastructure.Base.DataInitializer;
-using Lookif.Layers.Core.Infrastructure.Base.Lookif.Library.Common;
 using Lookif.Library.Common;
 using System.Collections.Generic;
 

@@ -28,13 +28,10 @@ namespace Lookif.Layers.Service.Jwt
 
         public async Task<AccessToken> GenerateAsync(User user)
         {
-            var secretKey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.SecretKey); // longer that 16 character
+            var secretKey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.SecretKey);  
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
 
-            var encryptionkey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.Encryptkey); //must be 16 character
-            //ToDo Make it Secure
-           // var encryptingCredentials = new EncryptingCredentials(new SymmetricSecurityKey(encryptionkey), SecurityAlgorithms.Aes128KW, SecurityAlgorithms.Aes128CbcHmacSha256);
-
+          
             var claims = await _getClaimsAsync(user);
 
             var descriptor = new SecurityTokenDescriptor
@@ -45,20 +42,13 @@ namespace Lookif.Layers.Service.Jwt
                 NotBefore = DateTime.Now.AddMinutes(_siteSetting.JwtSettings.NotBeforeMinutes),
                 Expires = DateTime.Now.AddMinutes(_siteSetting.JwtSettings.ExpirationMinutes),
                 SigningCredentials = signingCredentials,
-                //ToDo Make it Secure
-                //EncryptingCredentials = encryptingCredentials,
+                //ToDo Make it Secure 
                 Subject = new ClaimsIdentity(claims)
-            };
-
-            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-            //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
-            //JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
+            }; 
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var securityToken = tokenHandler.CreateJwtSecurityToken(descriptor);
-
-            //string encryptedJwt = tokenHandler.WriteToken(securityToken);
+            var securityToken = tokenHandler.CreateJwtSecurityToken(descriptor); 
 
             return new AccessToken(securityToken);
         }
@@ -66,24 +56,9 @@ namespace Lookif.Layers.Service.Jwt
         private async Task<IEnumerable<Claim>> _getClaimsAsync(User user)
         {
             var result = await signInManager.ClaimsFactory.CreateAsync(user);
-            //add custom claims
-            var list = new List<Claim>(result.Claims);
-           // list.Add(new Claim(ClaimTypes.MobilePhone, "09123456987"));
-
-            //JwtRegisteredClaimNames.Sub
-            //var securityStampClaimType = new ClaimsIdentityOptions().SecurityStampClaimType;
-
-            //var list = new List<Claim>
-            //{
-            //    new Claim(ClaimTypes.Name, user.UserName),
-            //    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            //    //new Claim(ClaimTypes.MobilePhone, "09123456987"),
-            //    //new Claim(securityStampClaimType, user.SecurityStamp.ToString())
-            //};
-
-            //var roles = new Role[] { new Role { Name = "Admin" } };
-            //foreach (var role in roles)
-            //    list.Add(new Claim(ClaimTypes.Role, role.Name));
+            
+            var list = new List<Claim>(result.Claims); 
+ 
 
             return list;
         }

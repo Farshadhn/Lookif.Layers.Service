@@ -52,16 +52,16 @@ namespace Lookif.Layers.Service.Services.Base
 
         public virtual async Task<T> DeleteAsync(T t, CancellationToken cancellationToken, bool save = true)
         {
-            await repository.UpdateAsync(t, cancellationToken, save);
+            await repository.DeleteAsync(t, cancellationToken, save);
             return t;
         }
         public virtual IQueryable<T> GetAll()
         {
-            return repository.TableNoTracking;
+            return repository.TableNoTracking.OrderByDescending(x => x.LastEditedDateTime);
         }
         public virtual async Task<List<T>> GetAllByCondition(Expression<Func<T, bool>> condition, CancellationToken cancellationToken)
         {
-            return await repository.TableNoTracking.Where(condition).ToListAsync(cancellationToken);
+            return await repository.TableNoTracking.Where(condition).OrderByDescending(x=>x.LastEditedDateTime).ToListAsync(cancellationToken);
         }
         public virtual IQueryable<T> QueryByCondition(Expression<Func<T, bool>> condition)
         {

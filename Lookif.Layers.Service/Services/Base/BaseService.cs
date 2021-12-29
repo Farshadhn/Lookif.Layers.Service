@@ -59,6 +59,12 @@ namespace Lookif.Layers.Service.Services.Base
         {
             return repository.TableNoTracking.OrderByDescending(x => x.LastEditedDateTime);
         }
+
+        public virtual async Task<List<T>> GetAll(CancellationToken cancellationToken)
+        {
+            return await GetAll().ToListAsync(cancellationToken); ;
+        }
+
         public virtual async Task<List<T>> GetAllByCondition(Expression<Func<T, bool>> condition, CancellationToken cancellationToken)
         {
             return await repository.TableNoTracking.Where(condition).OrderByDescending(x=>x.LastEditedDateTime).ToListAsync(cancellationToken);

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Lookif.Layers.Core.Infrastructure;
 using Lookif.Layers.Core.Infrastructure.Base;
 using Lookif.Layers.Core.Infrastructure.Base.Repositories;
 using Lookif.Layers.Core.MainCore.Base; 
@@ -43,7 +44,7 @@ namespace Lookif.Layers.Service.Services.Base
         }
 
         public virtual async Task<T> UpdateViaIdAsync(J t, CancellationToken cancellationToken, bool save = true)
-        {
+        { 
             var res = await GetByIdAsync(t, cancellationToken);
             await repository.UpdateAsync(res, cancellationToken, save);
             return res;
@@ -64,7 +65,7 @@ namespace Lookif.Layers.Service.Services.Base
         {
             return await GetAll().ToListAsync(cancellationToken); ;
         }
-
+      
         public virtual async Task<List<T>> GetAllByCondition(Expression<Func<T, bool>> condition, CancellationToken cancellationToken)
         {
             return await repository.TableNoTracking.Where(condition).OrderByDescending(x=>x.LastEditedDateTime).ToListAsync(cancellationToken);
@@ -88,6 +89,16 @@ namespace Lookif.Layers.Service.Services.Base
             await repository.AddRangeAsync(t, cancellationToken, save);
             return t;
 
+        }
+
+        public IQueryable<T> GetTemporal<Temporal>() where Temporal : ITemporal, T
+        {
+            return repository.GetTemporal<Temporal>();
+        }
+
+        public Task<List<T>> GetTemporal<Temporal>(CancellationToken cancellationToken) where Temporal : ITemporal, T
+        {
+            return repository.GetTemporal<Temporal>(cancellationToken);
         }
     }
 

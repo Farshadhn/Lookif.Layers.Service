@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Description>Main Services Related to "Lookif template".
 
 </Description>
@@ -10,20 +10,22 @@
     <Company>Lookif</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Farshadhn/Lookif.Layers.Service</RepositoryUrl>
-    <Version>1.0.21</Version>
-    <AssemblyVersion>1.0.21</AssemblyVersion>
+    <Version>2.0.0.1</Version>
+    <AssemblyVersion>2.0.0.1</AssemblyVersion>
     <NeutralLanguage>English</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <FileVersion>1.0.21</FileVersion>
+    <FileVersion>2.0.0.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lookif.Layers.Core" Version="1.2.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <Compile Remove="Dll\**" />
+    <EmbeddedResource Remove="Dll\**" />
+    <None Remove="Dll\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dll\" />
+    <PackageReference Include="Lookif.Layers.Core" Version="2.0.3.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
   </ItemGroup>
 
 </Project>

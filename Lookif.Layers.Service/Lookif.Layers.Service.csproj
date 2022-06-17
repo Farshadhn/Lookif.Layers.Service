@@ -10,11 +10,11 @@
     <Company>Lookif</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Farshadhn/Lookif.Layers.Service</RepositoryUrl>
-    <Version>2.0.0.1</Version>
-    <AssemblyVersion>2.0.0.1</AssemblyVersion>
+    <Version>2.0.1</Version>
+    <AssemblyVersion>2.0.1</AssemblyVersion>
     <NeutralLanguage>English</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <FileVersion>2.0.0.1</FileVersion>
+    <FileVersion>2.0.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lookif.Layers.Core" Version="2.0.3.2" />
+    <PackageReference Include="Lookif.Layers.Core" Version="2.0.3.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
   </ItemGroup>
 

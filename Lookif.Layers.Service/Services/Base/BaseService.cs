@@ -16,9 +16,9 @@ namespace Lookif.Layers.Service.Services.Base
   where T : class, IEntity<J>
     {
 
-        private readonly IRepository<T> repository;
+        private readonly IRepository<T, J> repository;
 
-        public BaseService(IRepository<T> repository)
+        public BaseService(IRepository<T, J> repository)
         {
             this.repository = repository;
         }

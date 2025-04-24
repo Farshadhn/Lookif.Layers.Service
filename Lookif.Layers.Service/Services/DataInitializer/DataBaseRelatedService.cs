@@ -1,10 +1,11 @@
 ﻿using Lookif.Layers.Core.Infrastructure.Base;
 using Lookif.Layers.Core.Infrastructure.Base.DataInitializer;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Lookif.Layers.Service.Services.DataInitializer;
 
-public class DataBaseRelatedService : IDataBaseRelatedService , ISingletonDependency
+public class DataBaseRelatedService : IDataBaseRelatedService, ISingletonDependency
 {
 
     public DataBaseRelatedService(IDataBaseService dataBaseService)
@@ -13,8 +14,10 @@ public class DataBaseRelatedService : IDataBaseRelatedService , ISingletonDepend
     }
 
     public IDataBaseService DataBaseService { get; }
-    public void RefreshDatabase(List<IDataInitializer> dataInitializers, bool Do_not_use_Migrations = false)
+    public async Task RefreshDatabaseAsync(List<IDataInitializer> dataInitializers, bool useMigration = true)
     {
-        DataBaseService.RefreshDatabase(dataInitializers, Do_not_use_Migrations);
+       await  DataBaseService.RefreshDatabaseAsync(dataInitializers, useMigration);
     }
+
+   
 }

@@ -65,11 +65,6 @@ public class JwtService : IJwtService, IScopedDependency
         var result = await signInManager.ClaimsFactory.CreateAsync(user);
         var claims = new List<Claim>(result.Claims);
 
-        // Get user roles
-        var roles = await userManager.GetRolesAsync(user);
-
-        // Add roles to claims
-        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
         return claims;
     }

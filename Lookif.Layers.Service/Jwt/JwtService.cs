@@ -11,6 +11,7 @@ using Lookif.Layers.Core.Infrastructure.Base;
 using Lookif.Layers.Core.Else.JWT;
 using Microsoft.AspNetCore.Identity;
 using Lookif.Layers.Core.MainCore.Identities;
+using System.Linq;
 
 namespace Lookif.Layers.Service.Jwt;
 
@@ -19,11 +20,17 @@ public class JwtService : IJwtService, IScopedDependency
 {
     private readonly SiteSettings _siteSetting;
     private readonly SignInManager<User> signInManager;
+    private readonly UserManager<User> userManager;
 
-    public JwtService(IOptionsSnapshot<SiteSettings> settings, SignInManager<User> signInManager)
+
+    public JwtService(
+        IOptionsSnapshot<SiteSettings> settings,
+        SignInManager<User> signInManager,
+        UserManager<User> userManager)
     {
         _siteSetting = settings.Value;
         this.signInManager = signInManager;
+        this.userManager = userManager;
     }
 
     public async Task<AccessToken> GenerateAsync(User user)
@@ -56,10 +63,14 @@ public class JwtService : IJwtService, IScopedDependency
     private async Task<IEnumerable<Claim>> _getClaimsAsync(User user)
     {
         var result = await signInManager.ClaimsFactory.CreateAsync(user);
-        
-        var list = new List<Claim>(result.Claims); 
+        var claims = new List<Claim>(result.Claims);
 
+        // Get user roles
+        var roles = await userManager.GetRolesAsync(user);
 
-        return list;
+        // Add roles to claims
+        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+
+        return claims;
     }
 }

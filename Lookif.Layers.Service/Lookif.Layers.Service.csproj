@@ -10,11 +10,11 @@
     <Company>Lookif</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Farshadhn/Lookif.Layers.Service</RepositoryUrl>
-    <Version>3.2.0</Version>
-    <AssemblyVersion>3.2.0</AssemblyVersion>
+    <Version>3.2.1</Version>
+    <AssemblyVersion>3.2.1</AssemblyVersion>
     <NeutralLanguage>English</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <FileVersion>3.2.0</FileVersion>
+    <FileVersion>3.2.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

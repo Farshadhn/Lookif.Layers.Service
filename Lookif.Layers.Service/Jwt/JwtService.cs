@@ -9,31 +9,27 @@ using Microsoft.IdentityModel.Tokens;
 using Lookif.Library.Common;
 using Lookif.Layers.Core.Infrastructure.Base; 
 using Lookif.Layers.Core.Else.JWT;
-using Microsoft.AspNetCore.Identity;
-using Lookif.Layers.Core.MainCore.Identities;
-using System.Linq;
+using Microsoft.AspNetCore.Identity; 
 
 namespace Lookif.Layers.Service.Jwt;
 
 
-public class JwtService : IJwtService, IScopedDependency
+public class JwtService<TUser> : IJwtService<TUser>, IScopedDependency
+where TUser : IdentityUser<Guid>
 {
     private readonly SiteSettings _siteSetting;
-    private readonly SignInManager<User> signInManager;
-    private readonly UserManager<User> userManager;
+    private readonly SignInManager<TUser> signInManager; 
 
 
     public JwtService(
         IOptionsSnapshot<SiteSettings> settings,
-        SignInManager<User> signInManager,
-        UserManager<User> userManager)
+        SignInManager<TUser> signInManager )
     {
         _siteSetting = settings.Value;
-        this.signInManager = signInManager;
-        this.userManager = userManager;
+        this.signInManager = signInManager; 
     }
 
-    public async Task<AccessToken> GenerateAsync(User user)
+    public async Task<AccessToken> GenerateAsync(TUser user)
     {
         var secretKey = Encoding.UTF8.GetBytes(_siteSetting.JwtSettings.SecretKey);  
         var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
@@ -60,7 +56,7 @@ public class JwtService : IJwtService, IScopedDependency
         return new AccessToken(securityToken);
     }
 
-    private async Task<IEnumerable<Claim>> _getClaimsAsync(User user)
+    private async Task<IEnumerable<Claim>> _getClaimsAsync(TUser user)
     {
         var result = await signInManager.ClaimsFactory.CreateAsync(user);
         var claims = new List<Claim>(result.Claims);

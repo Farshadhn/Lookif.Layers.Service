@@ -24,8 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.0" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
+
+ 
 
   <ItemGroup>
     <ProjectReference Include="..\..\Lookif.Layers.Data\Lookif.Layers.Data\Lookif.Layers.Data.csproj" />

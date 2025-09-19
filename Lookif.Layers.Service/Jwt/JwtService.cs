@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 using Lookif.Library.Common;
 using Lookif.Layers.Core.Infrastructure.Base; 
-using Lookif.Layers.Core.Else.JWT;
-using Microsoft.AspNetCore.Identity; 
+using Lookif.Layers.Core.Else.JWT; 
 
 namespace Lookif.Layers.Service.Jwt;
 

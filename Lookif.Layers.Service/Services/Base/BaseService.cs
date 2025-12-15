@@ -57,7 +57,11 @@ public class BaseService<T, J> : IBaseService<T, J>
         await repository.DeleteAsync(t, cancellationToken, save);
 
     }
+    public virtual async Task DeleteRangeAsync(List<T> t, CancellationToken cancellationToken, bool save = true)
+    {
+        await repository.DeleteRangeAsync(t, cancellationToken, save);
 
+    }
     public virtual IQueryable<T> GetAll()
     {
         return GetAll(new GetAllFilter());
@@ -119,6 +123,11 @@ public class BaseService<T, J> : IBaseService<T, J>
     {
         return repository.GetTemporal<Temporal>(cancellationToken);
     }
+    public Task SaveChangesAsync(CancellationToken cancellationToken) 
+    {
+        return repository.SaveChangesAsync(cancellationToken);
+    }
+
 }
 
 public class BaseService<T> : BaseService<T, Guid>
